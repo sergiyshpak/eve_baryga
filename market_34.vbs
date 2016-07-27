@@ -7,6 +7,9 @@
 
 TOWAR="3829"
 
+
+TOWAR=InputBox("Enter typeid","Enter typeid")
+
 URL="http://api.eve-central.com/api/quicklook?typeid="+TOWAR+"&regionlimit=10000016&regionlimit=10000002"
 
 set xmlDoc=CreateObject("Microsoft.XMLDOM")
