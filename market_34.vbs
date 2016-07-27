@@ -2,14 +2,15 @@
 
 'Dim o
 'Set o = CreateObject("MSXML2.XMLHTTP")
-'o.open "GET", "http://api.eve-central.com/api/quicklook?typeid=34", False
+'o.open "GET", "http://api.eve-central.com/api/quicklook?typeid=34&regionlimit=10000016&regionlimit=10000002", False
 'o.send
 
+URL="http://api.eve-central.com/api/quicklook?typeid=34&regionlimit=10000016&regionlimit=10000002"
 
 set xmlDoc=CreateObject("Microsoft.XMLDOM")
 xmlDoc.async="false"
 'xmlDoc.load("market.xml")
-xmlDoc.load("http://api.eve-central.com/api/quicklook?typeid=34")
+xmlDoc.load(URL)
 
 Set objFSO=CreateObject("Scripting.FileSystemObject")
 
