@@ -5,7 +5,9 @@
 'o.open "GET", "http://api.eve-central.com/api/quicklook?typeid=34&regionlimit=10000016&regionlimit=10000002", False
 'o.send
 
-URL="http://api.eve-central.com/api/quicklook?typeid=34&regionlimit=10000016&regionlimit=10000002"
+TOWAR="3829"
+
+URL="http://api.eve-central.com/api/quicklook?typeid="+TOWAR+"&regionlimit=10000016&regionlimit=10000002"
 
 set xmlDoc=CreateObject("Microsoft.XMLDOM")
 xmlDoc.async="false"
@@ -14,7 +16,7 @@ xmlDoc.load(URL)
 
 Set objFSO=CreateObject("Scripting.FileSystemObject")
 
-Set resFile = objFSO.CreateTextFile("market_sell.csv",True)  
+Set resFile = objFSO.CreateTextFile("market_sell_"+TOWAR+".csv",True)  
 resFile.Write "order,region,security,station,station_name,price,vol_remain.text,min_volume.text" & vbCrLf
 
 strQuery="/evec_api/quicklook/sell_orders/order"
@@ -33,7 +35,7 @@ For Each objNode in colNodes
 Next
 resFile.Close
 
-Set resFile = objFSO.CreateTextFile("market_buy.csv",True)  
+Set resFile = objFSO.CreateTextFile("market_buy_"+TOWAR+".csv",True)  
 resFile.Write "order,region,security,station,station_name,price,vol_remain,min_volume" & vbCrLf
 
 strQuery="/evec_api/quicklook/buy_orders/order"
