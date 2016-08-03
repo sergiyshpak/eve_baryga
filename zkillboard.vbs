@@ -1,7 +1,17 @@
 URL="https://zkillboard.com/system/30000142/"
 
+set xmlhttp = createobject ("msxml2.xmlhttp.3.0")
+
 Function CheckDrop(Arg1)
-     CheckDrop = "need to check " & Arg1
+	xmlhttp.open "get", Arg1, false
+	xmlhttp.send
+	dropText= xmlhttp.responseText
+    droposSt = InStr(1, dropText,"Total Dropped:")+199
+	droposEnd = InStr(droposSt, dropText,"h5>")-2
+	dropa = Mid(dropText, droposSt, droposEnd-droposSt)
+	'Msgbox dropa
+    'CheckDrop = "need to check " & Arg1
+	CheckDrop =  Replace(dropa,",","")
 End Function
 
 
@@ -19,7 +29,6 @@ utcTime= dateTime.GetVarDate (false)
 
 resFile.write (FormatDateTime(utcTime,4) & ",link,ship,bablo,system,region,drop" & vbCrLf)
 
-set xmlhttp = createobject ("msxml2.xmlhttp.3.0")
 xmlhttp.open "get", URL, false
 xmlhttp.send
 MyText= xmlhttp.responseText
