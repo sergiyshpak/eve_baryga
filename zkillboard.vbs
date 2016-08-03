@@ -1,5 +1,24 @@
 URL="https://zkillboard.com/system/30000142/"
 
+Function CheckDrop(Arg1)
+     CheckDrop = "need to check " & Arg1
+End Function
+
+
+Set objFSO=CreateObject("Scripting.FileSystemObject")
+Set resFile = objFSO.CreateTextFile("z_killborda.csv",True)  
+
+'''''''   crazy shit...
+Set dateTime = CreateObject("WbemScripting.SWbemDateTime")    
+dateTime.SetVarDate (now())
+'MsgBox  "Local Time:  " & dateTime
+'MsgBox  "UTC Time: " & dateTime.GetVarDate (false)
+utcTime= dateTime.GetVarDate (false)
+'MsgBox  "UTC Time: " & FormatDateTime(utcTime,4)
+'''
+
+resFile.write (FormatDateTime(utcTime,4) & ",link,ship,bablo,system,region,drop" & vbCrLf)
+
 set xmlhttp = createobject ("msxml2.xmlhttp.3.0")
 xmlhttp.open "get", URL, false
 xmlhttp.send
@@ -18,6 +37,7 @@ for i =1 to 50
 	'MsgBox kilaNum
 	'MsgBox kilaStr
 	
+	timekill =Mid(MyText, cur1st+71,5)
 
 	cur2st=InStr(cur1st,MyText, "<a href="+chr(34)+kilaStr+chr(34))
 	cur2end=InStr(cur2st+6, MyText, "<")
@@ -37,10 +57,18 @@ for i =1 to 50
 	cur4end=InStr(cur4st+8,MyText, "<")
 	region=Mid(MyText, cur4st+19, cur4end-cur4st-19)
 	
+	drop="pofig"
+	if (karabl<>"Capsule") then
+	   drop=CheckDrop(kilaLink)
+	end if
+
+	resFile.write (timekill & "," & kilaLink & "," & karabl & "," & utrata & "," & system & "," &  region & "," &  drop & vbCrLf)
 	
-	
-	Msgbox "Kill:"+kilaNum+"   Karabl:"+karabl+"  Uron:"+utrata+"   system:"+system+"  region:"+region
+	'Msgbox "Kill:"+kilaNum+"   Karabl:"+karabl+"  Uron:"+utrata+"   system:"+system+"  region:"+region
 	
 	startpos=curpos+1
 	
 next
+
+
+resFile.Close
