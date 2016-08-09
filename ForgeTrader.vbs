@@ -43,30 +43,35 @@ xmlhttp.open "get", URL, false
 	    itemPosEnd=InStr(itemPosSt, MyText,"</td>")
 	    itemStr=Mid(MyText, itemPosSt+12, itemPosEnd-itemPosSt-12)
 		'and link to get volume!!
+		itemStr=Replace(itemStr, "quicklook",  "https://eve-central.com/home/quicklook" )
 
 	    sellprPosSt=InStr(itemPosEnd, MyText,"<b>Selling:</b>")
-	    sellprPosEnd=InStr(sellprPosSt, MyText,"</td>")
+	    sellprPosEnd=InStr(sellprPosSt, MyText,"ISK")
 	    sellprStr=Mid(MyText, sellprPosSt+15, sellprPosEnd-sellprPosSt-15)
 
 	    buyprPosSt=InStr(sellprPosEnd, MyText,"<b>Buying:</b>")
-	    buyprPosEnd=InStr(buyprPosSt, MyText,"</td>")
+	    buyprPosEnd=InStr(buyprPosSt, MyText,"ISK")
 	    buyprStr=Mid(MyText, buyprPosSt+14, buyprPosEnd-buyprPosSt-14)
 
 		unitsPosSt=InStr(buyprPosEnd, MyText,"<b>Units tradeable:</b>")
-	    unitsPosEnd=InStr(unitsPosSt, MyText,"</td>")
-	    unitsStr=Mid(MyText, unitsPosSt+23, unitsPosEnd-unitsPosSt-23)
+	    unitsPosEnd=InStr(unitsPosSt, MyText,"(")
+	    unitsStr=Trim(Mid(MyText, unitsPosSt+23, unitsPosEnd-unitsPosSt-23))
 
 	    profitPosSt=InStr(unitsPosEnd, MyText,"<i>Profit per trip:</i>")
-	    profitPosEnd=InStr(profitPosSt, MyText,"</td>")
-	    profitStr=Mid(MyText, profitPosSt+24, profitPosEnd-profitPosSt-24)
+	    profitPosEnd=InStr(profitPosSt, MyText,"ISK")
+	    profitStr=Trim(Mid(MyText, profitPosSt+28, profitPosEnd-profitPosSt-28))
 
 		' count 
-		totalmoneyNum="11111"
+		totalmoneyNum=CDbl(Replace(sellprStr,",",""))*CInt(unitsStr)
+		totalmoneyStr=CStr(totalmoneyNum)
 		
-		profitperxentnum="12"
+		profit1Num=CDbl(Replace(profitStr,",",""))
+		profit1Str=CStr(profit1Num)
+
+		profitpercentnum=CStr( profit1Num/totalmoneyNum	)
 		
 		resFile.write ("<tr> <td>"&fromStr &"</td> <td>"&toStr &"</td> <td>"&jumpsStr &"</td> <td>"&itemStr &"</td>  <td>"&sellprStr &"</td>" )
-        resFile.write ("<td>"&buyprStr&"</td> <td>"&unitsStr&"</td> <td>"&totalmoneyNum&"</td> <td>"&profitStr&"</td> <td>"&profitperxentnum&"</td>  </tr> " & vbCrLf)
+        resFile.write ("<td>"&buyprStr&"</td> <td>"&unitsStr&"</td> <td>"&FormatCurrency(totalmoneyStr)&"</td> <td>"&FormatCurrency(profitStr)&"</td> <td>"&FormatPercent(profit1Num/totalmoneyNum)&"</td>  </tr> " & vbCrLf)
 
 		
 		
