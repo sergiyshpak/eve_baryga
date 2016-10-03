@@ -38,94 +38,24 @@ for j = 0 to UBound(shipz)
 	trainingTime=Mid(MyText, posTrainingSt, posTrainingEnd-posTrainingSt)
 	resFile.write (trainingTime+",")
 
-	posEnd=posTrainingEnd
+	kanec=dai1(MyText, posTrainingEnd, "powergrid", resFile)
+	kanec=dai1(MyText, kanec, "cpu output", resFile)
+	kanec=dai1(MyText, kanec, "capacitor", resFile)
+	kanec=dai1(MyText, kanec, "high slots", resFile)
+	kanec=dai1(MyText, kanec, "launcher slots", resFile)
+	kanec=dai1(MyText, kanec, "turret slots", resFile)
+	kanec=dai1(MyText, kanec, "middle slots", resFile)
+	kanec=dai1(MyText, kanec, "low slots", resFile)
+	kanec=dai1(MyText, kanec, "rigs", resFile)
+	kanec=dai1(MyText, kanec, "calibration", resFile)
+	kanec=dai1(MyText, kanec, "max. velocity", resFile)
+	kanec=dai1(MyText, kanec, "inertia modifier", resFile)
 
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"powergrid")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")
-
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"cpu output")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")
-
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"capacitor")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")	
-
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"high slots")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")		
-	
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"launcher slots")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")		
-	
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"turret slots")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")		
-	
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"middle slots")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")		
-	
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"low slots")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")		
-
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"rigs")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")		
-
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"calibration")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")		
-
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"max. velocity")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")		
-
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"inertia modifier")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")		
-	
 	' BUG IN THEIR CODE - must be Warp Speed
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"inertia modifier")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")		
-	
-	posSt1=InStr(posEnd, MyText, "title="+chr(34)+"base time to warp")
-	posSt=InStr(posSt1, MyText, "div class="+chr(34)+"item att-value")+27
-	posEnd=InStr(posSt, MyText, "<")
-	data=Replace(Mid(MyText, posSt, posEnd-posSt),",","")
-	resFile.write (data+",")	
-	
-	kanec=dai1(MyText, posEnd, "max. targeting range", resFile)
+	kanec=dai1(MyText, kanec, "inertia modifier", resFile)
+
+	kanec=dai1(MyText, kanec, "base time to warp", resFile)
+	kanec=dai1(MyText, kanec, "max. targeting range", resFile)
 	kanec=dai1(MyText, kanec, "max. locked targets", resFile)
 	'kanec=dai1(MyText, kanec, "Gravimetric sensor strength", resFile)
 	kanec=dai1(MyText, kanec, "ship signature radius", resFile)
