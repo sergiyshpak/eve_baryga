@@ -17,7 +17,37 @@ resFile.write ("ShipName,TrainingTime,Powergrid,CPU,Capacitor,high slots, launch
 resFile.write (vbCrLf)
 
 Dim shipz
-shipz = Split ("Impairor Kestrel Griffin Merlin Heron Atron Navitas Tristan Maulus Incursus Imicus Slasher Burst Breacher")     
+shipz = Split ("Impairor Ibis Velator Reaper Executioner Inquisitor Tormentor Crucifier Punisher Magnate Condor Kestrel Griffin Merlin Heron " + _
+"Atron Navitas Tristan Maulus Incursus Imicus Slasher Burst Breacher Vigil Rifter Probe Imperial_Navy_Slicer Crucifier_Navy_Issue "+ _
+"Caldari_Navy_Hookbill Griffin_Navy_Issue Federation_Navy_Comet Maulus_Navy_Issue Republic_Fleet_Firetail Vigil_Fleet_Issue Vengeance "+ _
+"Retribution Hawk Harpy Ishkur Enyo Wolf Jaguar Anathema Purifier Manticore Buzzard Nemesis Helios Cheetah "+ _
+"Hound Sentinel 	Kitsune 	Keres 	Hyena 	Crusader 	Malediction 	Crow 	Raptor 	Taranis 	Ares 	Claw "+ _
+"Stiletto Deacon 	Kirin 	Thalia 	Scalpel 	Coercer 	Dragoon 	Cormorant 	Corax 	Catalyst 	Algos 	Thrasher "+ _
+"Talwar 	Pontifex 	Stork 	Magus 	Bifrost 	Heretic 	Flycatcher 	Eris 	Sabre 	Confessor 	Jackdaw 	Hecate "+ _
+"Svipul 	Arbitrator 	Maller 	Augoror 	Omen 	Moa 	Blackbird 	Osprey 	Caracal 	Celestis 	Exequror 	Vexor "+ _
+"Thorax 	Stabber 	Rupture 	Bellicose 	Scythe 	Augoror_Navy_Issue 	Omen_Navy_Issue 	Caracal_Navy_Issue 	Osprey_Navy_Issue "+ _
+"Exequror_Navy_Issue 	Vexor_Navy_Issue 	Scythe_Fleet_Issue 	Stabber_Fleet_Issue 	Zealot 	Sacrilege 	Eagle 	Cerberus "+ _
+"Ishtar 	Deimos 	Vagabond 	Muninn 	Devoter 	Onyx 	Phobos 	Broadsword 	Guardian 	Basilisk 	Oneiros 	Scimitar "+ _
+"Curse 	Pilgrim 	Falcon 	Rook 	Arazu 	Lachesis 	Huginn 	Rapier 	Legion 	Tengu 	Proteus 	Loki 	Prophecy "+ _
+"Harbinger 	Oracle 	Drake 	Ferox 	Naga 	Brutix 	Myrmidon 	Talos 	Hurricane 	Cyclone 	Tornado 	Harbinger_Navy_Issue "+ _
+"Drake_Navy_Issue 	Brutix_Navy_Issue 	Hurricane_Fleet_Issue 	Damnation 	Absolution 	Vulture 	Nighthawk 	Astarte 	Eos "+ _
+"Claymore 	Sleipnir 	Abaddon 	Apocalypse 	Armageddon 	Scorpion 	Raven 	Rokh 	Hyperion 	Megathron 	Dominix 	Tempest "+ _
+"Typhoon 	Maelstrom 	Apocalypse_Navy_Issue 	Armageddon_Navy_Issue 	Scorpion_Navy_Issue 	Raven_Navy_Issue "+ _
+"Megathron_Navy_Issue 	Dominix_Navy_Issue 	Tempest_Fleet_Issue 	Typhoon_Fleet_Issue 	Redeemer 	Widow 	Sin "+ _
+"Panther 	Paladin 	Golem 	Kronos_(Ship) 	Vargur 	Archon 	Chimera 	Thanatos 	Nidhoggur 	Aeon 	Wyvern 	Nyx "+ _
+"Hel 	Revelation 	Phoenix 	Moros 	Naglfar 	Apostle 	Minokawa 	Ninazu 	Lif 	Avatar 	Leviathan 	Erebus "+ _
+"Ragnarok 	Providence 	Charon 	Obelisk 	Fenrir 	Ark 	Rhea 	Anshar 	Nomad 	Bestower 	Sigil 	Badger 	Tayra 	Nereus "+ _
+"Kryos 	Epithal 	Miasmos 	Iteron_Mark_V 	Hoarder 	Mammoth 	Wreathe 	Prorator 	Impel 	Crane 	Bustard 	Viator "+ _
+"Occator 	Mastodon 	Prowler 	Venture 	Prospect 	Endurance 	Covetor 	Retriever 	Procurer 	Hulk 	Skiff "+ _
+"Mackinaw 	Noctis 	Orca 	Bowhead 	Rorqual 	Dramiel 	Cruor 	Worm 	Garmur 	Succubus 	Daredevil 	Astero 	Cynabal "+ _
+"Ashimmu 	Gila 	Orthrus 	Phantasm 	Vigilant 	Stratios 	Machariel 	Bhaalgorn 	Rattlesnake 	Barghest 	Nightmare "+ _
+"Vindicator 	Nestor 	Vehement 	Revenant 	Vendetta 	Vanquisher 	Apotheosis 	Interbus_Shuttle 	Leopard 	Echelon 	Echo "+ _
+"Hematos 	Immolator 	Taipan 	Violator 	Zephyr 	Gold_Magnate 	Inner_Zone_Shipping_Imicus 	Sarum_Magnate 	Silver_Magnate "+ _
+"Sukuuvestaa_Heron 	Tash-Murkon_Magnate 	Vherokior_Probe 	Cambion 	Freki 	Malice 	Utu 	Chremoas 	Imp 	Whiptail "+ _
+"Aliastra_Catalyst 	Inner_Zone_Shipping_Catalyst 	Intaki_Syndicate_Catalyst 	InterBus_Catalyst 	Nefantar_Thrasher "+ _
+"Quafe_Catalyst 	Guardian-Vexor 	Victorieux_Luxury_Yacht 	Adrestia 	Mimir 	Vangel 	Fiend 	Etana 	Chameleon 	Moracha "+ _
+"Gnosis 	Scorpion_Ishukone_Watch 	Apocalypse_Imperial_Issue 	Armageddon_Imperial_Issue 	Raven_State_Issue 	Megathron_Federate_Issue "+ _
+"Tempest_Tribal_Issue Primae Miasmos_Amastris_Edition Miasmos_Quafe_Ultra_Edition Miasmos_Quafe_Ultramarine_Edition")     
 
 for j = 0 to UBound(shipz)
 	nazwa=shipz(j)
