@@ -22,7 +22,7 @@ set xmlhttp = createobject ("msxml2.xmlhttp.3.0")
 Set objFSO=CreateObject("Scripting.FileSystemObject")
 Set resFile = objFSO.CreateTextFile("shipz.csv",True)  
 resFile.write ("ShipName,TrainingTime,Powergrid,CPU,Capacitor,high slots,launcher,turret,medium slots,low slots,rigs,calibration," + _
-"max. velocity,Inertia Modifier,Warp Speed,Base Time to Warp,max. targeting range,max.locked tagets,signature radius,scan res," + _
+"max. velocity,Inertia Modifier,Warp Speed,Base Time to Warp,drone capacity,drone bandwith,max. targeting range,max.locked tagets,signature radius,scan res," + _
 "structure hitpoints,cargo capacity,shields,armor,")
 resFile.write (vbCrLf)
 
@@ -95,6 +95,8 @@ for j = 0 to UBound(shipz)
 	kanec=dai1(MyText, kanec, "inertia modifier", resFile)
 
 	kanec=dai1(MyText, kanec, "base time to warp", resFile)
+	kanec=dai1(MyText, kanec, "drone capacity", resFile)
+	kanec=dai1(MyText, kanec, "drone bandwith", resFile)
 	kanec=dai1(MyText, kanec, "max. targeting range", resFile)
 	kanec=dai1(MyText, kanec, "max. locked targets", resFile)
 	'kanec=dai1(MyText, kanec, "Gravimetric sensor strength", resFile)
