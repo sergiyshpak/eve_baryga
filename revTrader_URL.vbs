@@ -1,7 +1,7 @@
 'URL="https://eve-central.com/home/tradefind_display.html?qtype=Regions&newsearch=1&fromt=10000002&to=10000002"
 URL="https://eve-central.com/home/tradefind_display.html?qtype=SystemToRegion&newsearch=1&fromt=30000142&to=10000002"
 
-htmlName="TheForgeTrade.html"
+htmlName="revTrade.html"
 
 ' https://eve-central.com/home/tradefind_display.html?qtype=Regions&newsearch=1&fromt=10000002&to=10000002
 ' https://eve-central.com/home/tradefind_display.html?qtype=Regions&fromt=10000002&to=10000002&age=24&minprofit=500000&size=8000&startat=50&sort=jprofit
@@ -23,17 +23,8 @@ resFile.write ("<th>buy</th> <th>count</th><th>polnoe</th> <th>tot money</th> <t
 
 
 
-Dim urls(3)
-urls(0) ="https://eve-central.com/home/tradefind_display.html?qtype=SystemToRegion&newsearch=1&fromt=30000142&to=10000002"  ' jita to forge
-urls(1) ="https://eve-central.com/home/tradefind_display.html?qtype=SystemToRegion&newsearch=1&fromt=30000142&to=10000016"  ' jita lonetrek
-urls(2) ="https://eve-central.com/home/tradefind_display.html?qtype=SystemToRegion&newsearch=1&fromt=30000142&to=10000033"   ' jita citadel
-urls(3) ="https://eve-central.com/home/tradefind_display.html?qtype=SystemToRegion&newsearch=1&fromt=30000142&to=10000032"     'juta Sinq Laison
-
-for j = 0 to UBound(urls)
-	URL=urls(j)
-
-	'MsgBox URL
-	xmlhttp.open "get", URL, false
+	URL=InputBox("Enter URL","Enter URL")
+	xmlhttp.open "get", Trim(URL), false
 	xmlhttp.send
 	MyText= xmlhttp.responseText
 
@@ -96,8 +87,6 @@ for j = 0 to UBound(urls)
 		
 		startpos=InStr(profitPosEnd, MyText,"<b>From:</b>")
     loop 
-	
-next
 
 resFile.write ("</table></body></html>")
 resFile.Close
