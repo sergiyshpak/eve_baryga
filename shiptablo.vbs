@@ -3,6 +3,16 @@ Function dai1(Arg1, psFrom, texto, resFile)
 	posSt=InStr(posSt1, Arg1, "div class="+chr(34)+"item att-value")+27
 	posEnd=InStr(posSt, Arg1, "<")
 	data=Replace(Replace(Mid(Arg1, posSt, posEnd-posSt),",",""), "&#179;","")
+	'data=Replace(data, " km","")
+	
+	if(texto="base time to warp") then
+	   data=Replace(data, " s","")
+	end if
+
+	if(texto="max. targeting range") then
+	   data=Replace(data, " km","")
+	end if
+	
 	resFile.write (data+",")	
 	dai1=posEnd
 End Function	
@@ -11,9 +21,9 @@ set xmlhttp = createobject ("msxml2.xmlhttp.3.0")
 
 Set objFSO=CreateObject("Scripting.FileSystemObject")
 Set resFile = objFSO.CreateTextFile("shipz.csv",True)  
-resFile.write ("ShipName,TrainingTime,Powergrid,CPU,Capacitor,high slots, launcher, turret, medium slots, low slots, rigs, calibration," + _
-"max. velocity,Inertia Modifier,Warp Speed,Base Time to Warp,max. targeting range, max.locked tagets, signature radius, scan res," + _
-"structure hitpoints, cargo capacity, shields, armor,")
+resFile.write ("ShipName,TrainingTime,Powergrid,CPU,Capacitor,high slots,launcher,turret,medium slots,low slots,rigs,calibration," + _
+"max. velocity,Inertia Modifier,Warp Speed,Base Time to Warp,max. targeting range,max.locked tagets,signature radius,scan res," + _
+"structure hitpoints,cargo capacity,shields,armor,")
 resFile.write (vbCrLf)
 
 Dim shipz
