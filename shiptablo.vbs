@@ -1,10 +1,8 @@
-
-	
 Function dai1(Arg1, psFrom, texto, resFile)
 	posSt1=InStr(psFrom, Arg1, "title="+chr(34)+texto)
 	posSt=InStr(posSt1, Arg1, "div class="+chr(34)+"item att-value")+27
 	posEnd=InStr(posSt, Arg1, "<")
-	data=Replace(Mid(Arg1, posSt, posEnd-posSt),",","")
+	data=Replace(Replace(Mid(Arg1, posSt, posEnd-posSt),",",""), "&#179;","")
 	resFile.write (data+",")	
 	dai1=posEnd
 End Function	
@@ -14,11 +12,12 @@ set xmlhttp = createobject ("msxml2.xmlhttp.3.0")
 Set objFSO=CreateObject("Scripting.FileSystemObject")
 Set resFile = objFSO.CreateTextFile("shipz.csv",True)  
 resFile.write ("ShipName,TrainingTime,Powergrid,CPU,Capacitor,high slots, launcher, turret, medium slots, low slots, rigs, calibration," + _
-"max. velocity,Inertia Modifier,Warp Speed,Base Time to Warp,max. targeting range, max.locked tagets, signature radius, scan res")
+"max. velocity,Inertia Modifier,Warp Speed,Base Time to Warp,max. targeting range, max.locked tagets, signature radius, scan res," + _
+"structure hitpoints, cargo capacity, shields, armor,")
 resFile.write (vbCrLf)
 
 Dim shipz
-shipz = Split ("Impairor Kestrel 	Griffin 	Merlin 	Heron 	Atron 	Navitas 	Tristan 	Maulus 	Incursus 	Imicus 	Slasher 	Burst 	Breacher")     
+shipz = Split ("Impairor Kestrel Griffin Merlin Heron Atron Navitas Tristan Maulus Incursus Imicus Slasher Burst Breacher")     
 
 for j = 0 to UBound(shipz)
 	nazwa=shipz(j)
@@ -131,6 +130,11 @@ for j = 0 to UBound(shipz)
 	'kanec=dai1(MyText, kanec, "Gravimetric sensor strength", resFile)
 	kanec=dai1(MyText, kanec, "ship signature radius", resFile)
 	kanec=dai1(MyText, kanec, "scan resolution", resFile)
+	
+	kanec=dai1(MyText, kanec, "structure hitpoints", resFile)
+	kanec=dai1(MyText, kanec, "cargo capacity", resFile)
+	kanec=dai1(MyText, kanec, "shields", resFile)
+	kanec=dai1(MyText, kanec, "armor", resFile)
 	
 	
 	resFile.write (vbCrLf)
