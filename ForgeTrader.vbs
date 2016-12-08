@@ -112,3 +112,5 @@ resFile.Close
 set shell = WScript.CreateObject("WScript.Shell")
 shell.Run "cmd /c  start " + htmlName
 
+
+'////  route url  http://evemaps.dotlan.net/route/2:Jita:Tarta
