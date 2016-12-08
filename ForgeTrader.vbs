@@ -10,7 +10,8 @@ htmlName="TheForgeTrade.html"
 '
 'https://eve-central.com/home/quicklook.html?typeid=3687
  
-
+On Error Resume Next
+ 
 set xmlhttp = createobject ("msxml2.xmlhttp.3.0")
 
 
@@ -21,16 +22,20 @@ resFile.write ("<html><head><script src=sorttable.js></script></head><body><tabl
 resFile.write ("<tr> <th>from</th> <th>to</th> <th>jumps</th> <th>what</th>  <th>sell</th>" )
 resFile.write ("<th>buy</th> <th>count</th><th>polnoe</th> <th>tot money</th> <th>tot prof</th> <th>perc prof</th>  </tr> " & vbCrLf)
 
+' https://eve-central.com/home/tradefind_display.html?set=1&fromt=30000142&to=10000002&qtype=SystemToRegion&age=24&minprofit=100000&size=10000&limit=5000&sort=jprofit&prefer_sec=1
+
+URL1="https://eve-central.com/home/tradefind_display.html?set=1&fromt="
+URLFROM="30000142"
+URL2="&to="
+URL3="&qtype=SystemToRegion&age=24&minprofit=100000&size=10000&limit=5000&sort=jprofit&prefer_sec=1"
 
 
-Dim urls(3)
-urls(0) ="https://eve-central.com/home/tradefind_display.html?qtype=SystemToRegion&newsearch=1&fromt=30000142&to=10000002"  ' jita to forge
-urls(1) ="https://eve-central.com/home/tradefind_display.html?qtype=SystemToRegion&newsearch=1&fromt=30000142&to=10000016"  ' jita lonetrek
-urls(2) ="https://eve-central.com/home/tradefind_display.html?qtype=SystemToRegion&newsearch=1&fromt=30000142&to=10000033"   ' jita citadel
-urls(3) ="https://eve-central.com/home/tradefind_display.html?qtype=SystemToRegion&newsearch=1&fromt=30000142&to=10000032"     'juta Sinq Laison
+Dim urls
+urls=Split("10000002 10000016 10000033 10000032 10000067")
 
 for j = 0 to UBound(urls)
-	URL=urls(j)
+
+	URL=URL1+URLFROM+URL2+urls(j)+URL3
 
 	'MsgBox URL
 	xmlhttp.open "get", URL, false
@@ -40,6 +45,7 @@ for j = 0 to UBound(urls)
 	startpos=1
 
 	do while startpos>0
+
 	    fromPosSt=InStr(startpos, MyText,"<b>From:</b>")
 		'MsgBox fromPosSt
 	    fromPosEnd=InStr(fromPosSt, MyText,"</td>")
@@ -89,8 +95,8 @@ for j = 0 to UBound(urls)
 		profitpercentnum=CStr( profit1Num/totalmoneyNum	)
 		
 		if (profit1Num/totalmoneyNum)>CDbl(0.04) then 
-		resFile.write ("<tr> <td>"&fromStr &"</td> <td>"&toStr &"</td> <td>"&jumpsStr &"</td> <td>"&itemStr &"</td>  <td>"&sellprStr &"</td>" )
-        resFile.write ("<td>"&buyprStr&"</td> <td>"&unitsStr&"</td><td>"&unitsPolnStr&"</td><td>"&FormatCurrency(totalmoneyStr)&"</td> <td>"&FormatCurrency(profitStr)&"</td> <td>"&FormatPercent(profit1Num/totalmoneyNum)&"</td>  </tr> " & vbCrLf)
+		resFile.write ("<tr> <td>"&fromStr &"</td> <td>"&toStr &"</td> <td>"&jumpsStr &"</td> <td>"&itemStr &"</td>  <td>"&sellprStr &"</td>" & _
+        "<td>"&buyprStr&"</td> <td>"&unitsStr&"</td><td>"&unitsPolnStr&"</td><td>"&FormatCurrency(totalmoneyStr)&"</td> <td>"&FormatCurrency(profitStr)&"</td> <td>"&FormatPercent(profit1Num/totalmoneyNum)&"</td>  </tr> " & vbCrLf)
 		end if
 		
 		
