@@ -25,13 +25,13 @@ set xmlhttp = createobject ("msxml2.xmlhttp.3.0")
 
 Set objFSO=CreateObject("Scripting.FileSystemObject")
 Set resFile = objFSO.CreateTextFile("shipz.csv",True)  
-resFile.write ("ShipName,TrainingTime,Powergrid,CPU,Capacitor,high slots,launcher,turret,medium slots,low slots,rigs,calibration," + _
+resFile.write ("ShipName,Nation,Type,TrainingTime,Powergrid,CPU,Capacitor,high slots,launcher,turret,medium slots,low slots,rigs,calibration," + _
 "max. velocity,Inertia Modifier,Warp Speed,Base Time to Warp,drone capacity,drone bandwith,max. targeting range,max.locked tagets,ship signature radius,scan res," + _
 "structure hitpoints,cargo capacity,shields,armor,")
 resFile.write (vbCrLf)
 
 Dim shipz
-shipz = Split ("Impairor Ibis Velator Reaper Executioner Inquisitor Tormentor Crucifier Punisher Magnate Condor Kestrel Griffin Merlin Heron " + _
+shipz = Split ("Impairor Ibis Velator Reaper Executioner Inquisitor Tormentor Crucifier Punisher Magnate Condor Kestrel Griffin Merlin Heron "+ _
 "Atron Navitas Tristan Maulus Incursus Imicus Slasher Burst Breacher Vigil Rifter Probe Imperial_Navy_Slicer Crucifier_Navy_Issue "+ _
 "Caldari_Navy_Hookbill Griffin_Navy_Issue Federation_Navy_Comet Maulus_Navy_Issue Republic_Fleet_Firetail Vigil_Fleet_Issue Vengeance "+ _
 "Retribution Hawk Harpy Ishkur Enyo Wolf Jaguar Anathema Purifier Manticore Buzzard Nemesis Helios Cheetah "+ _
@@ -55,13 +55,13 @@ shipz = Split ("Impairor Ibis Velator Reaper Executioner Inquisitor Tormentor Cr
 "Occator 	Mastodon 	Prowler 	Venture 	Prospect 	Endurance 	Covetor 	Retriever 	Procurer 	Hulk 	Skiff "+ _
 "Mackinaw 	Noctis 	Orca 	Bowhead 	Rorqual 	Dramiel 	Cruor 	Worm 	Garmur 	Succubus 	Daredevil 	Astero 	Cynabal "+ _
 "Ashimmu 	Gila 	Orthrus 	Phantasm 	Vigilant 	Stratios 	Machariel 	Bhaalgorn 	Rattlesnake 	Barghest 	Nightmare "+ _
-"Vindicator 	Nestor 	Vehement 	Revenant 	Vendetta 	Vanquisher 	Apotheosis 	Interbus_Shuttle 	Leopard 	Echelon 	Echo "+ _
+"Vindicator Nestor Vehement Revenant Vendetta 	Vanquisher 	Apotheosis 	Interbus_Shuttle 	Leopard 	Echelon 	Echo "+ _
 "Hematos 	Immolator 	Taipan 	Violator 	Zephyr 	Gold_Magnate 	Inner_Zone_Shipping_Imicus 	Sarum_Magnate 	Silver_Magnate "+ _
 "Sukuuvestaa_Heron 	Tash-Murkon_Magnate 	Vherokior_Probe 	Cambion 	Freki 	Malice 	Utu 	Chremoas 	Imp 	Whiptail "+ _
 "Aliastra_Catalyst 	Inner_Zone_Shipping_Catalyst 	Intaki_Syndicate_Catalyst 	InterBus_Catalyst 	Nefantar_Thrasher "+ _
 "Quafe_Catalyst 	Guardian-Vexor 	Victorieux_Luxury_Yacht 	Adrestia 	Mimir 	Vangel 	Fiend 	Etana 	Chameleon 	Moracha "+ _
 "Gnosis 	Scorpion_Ishukone_Watch 	Apocalypse_Imperial_Issue 	Armageddon_Imperial_Issue 	Raven_State_Issue 	Megathron_Federate_Issue "+ _
-"Tempest_Tribal_Issue Primae Miasmos_Amastris_Edition Miasmos_Quafe_Ultra_Edition Miasmos_Quafe_Ultramarine_Edition")     
+"Tempest_Tribal_Issue Primae Miasmos_Amastris_Edition Miasmos_Quafe_Ultra_Edition Miasmos_Quafe_Ultramarine_Edition" )     
 
 for j = 0 to UBound(shipz)
 	nazwa=shipz(j)
@@ -70,12 +70,32 @@ for j = 0 to UBound(shipz)
 	xmlhttp.send
 	MyText= xmlhttp.responseText
 
+	'<div class="shipname">Bantam</div>
 	posShipSt=InStr(1, MyText,"div class="+chr(34)+"shipname")+21
 	posShipEnd=InStr(posShipSt, MyText, "<")
 	'MsgBox " "+cstr(posShipSt)+" "+cstr(posShipEnd)
 	shipName=Mid(MyText, posShipSt, posShipEnd-posShipSt)
 	resFile.write (shipName+",")
+
 	
+	if nazwa="Vehement"  then            'sabaki!!!
+       resFile.write ("Serpentis,Pirate Faction Ships,")
+    else 	   
+	   '<td class="faction">Caldari State</td>
+	   posNatSt=InStr(1, MyText,"td class="+chr(34)+"faction")+19
+	   posNatEnd=InStr(posNatSt, MyText, "<")
+	   shipNat=Mid(MyText, posNatSt, posNatEnd-posNatSt)
+	   resFile.write (shipNat+",")
+    	
+
+       'title="Category:Ship Database">Ship Database</a></li><li><a href="/Category:Standard_Frigates" title="Category:Standard Frigates">Standard Frigates</a>
+	   posCateSt1=InStr(1, MyText,"Ship Database</a></li><li><a href="+chr(34)+"/Category:")
+	   posCateSt=InStr(posCateSt1, MyText,"title="+chr(34)+"Category:")+16
+	   posCateEnd=InStr(posCateSt, MyText, ">")-1
+	   shipCateg=Mid(MyText, posCateSt, posCateEnd-posCateSt)
+	   resFile.write (shipCateg+",")
+	end if
+    
 	posTrainingSt1=InStr(posShipEnd, MyText, "Training Time")
 	posTrainingSt=InStr(posTrainingSt1, MyText, "div class="+chr(34)+"value")+18
 	posTrainingEnd=InStr(posTrainingSt, MyText, "<")
